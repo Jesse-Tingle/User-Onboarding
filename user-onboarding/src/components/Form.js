@@ -1,8 +1,7 @@
-import React from 'react';
-
+import React from 'react'; 
 import { withFormik, Form, Field } from 'formik';
-
 import * as yup from 'yup';
+import axios from 'axios';
 
 const UserOnboard = ({errors, touched}) => {
   // console.log(errors)
@@ -46,6 +45,13 @@ export default withFormik({
     terms: yup.boolean().oneOf([true])
   }),
   handleSubmit: (values) => {
-    console.log(values);
+    // console.log(values);
+    axios.post('https://reqres.in/api/users', values)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log('Error: ', err)
+      })
   }
 })(UserOnboard)
