@@ -10,7 +10,12 @@ const UserOnboard = (props) => {
       <Field type="text" name="name" placeholder="Name"  />
       <Field type="text" name="email" placeholder="Email" />
       <Field type="text" name="password" placeholder="Password" />
-      <Field type="checkbox" name="terms" placeholder="Terms of Service" />
+      
+      <label>
+        <Field type="checkbox" name="terms" placeholder="Terms of Service" />
+        <span>Terms of Service</span>
+      </label>
+      
       <button type="submit">Submit</button>
     </Form>
   )
