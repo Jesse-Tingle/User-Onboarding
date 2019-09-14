@@ -1,17 +1,26 @@
 import React from 'react';
 
-import { withFormik, Form, Field } from 'formik'
+import { withFormik, Form, Field } from 'formik';
 
-const UserOnboard = (props) => {
-//   console.log(props)
+import * as yup from 'yup';
+
+const UserOnboard = ({errors, touched}) => {
+  // console.log(errors)
 
   return (
     <Form>
+
+      {touched.name && errors.name && <p className="error">{errors.name}</p>}
       <Field type="text" name="name" placeholder="Name"  />
+
+      {touched.email && errors.email && <p className="error">{errors.email}</p>}
       <Field type="text" name="email" placeholder="Email" />
+
+      {touched.password && errors.password && <p className="error">{errors.password}</p>}
       <Field type="text" name="password" placeholder="Password" />
       
       <label>
+        {touched.terms && errors.terms && <p className="error">{errors.terms}</p>}
         <Field type="checkbox" name="terms" placeholder="Terms of Service" />
         <span>Terms of Service</span>
       </label>
@@ -30,6 +39,12 @@ export default withFormik({
       terms: values.terms || '',
     }
   },
+  validationSchema: yup.object().shape({
+    name: yup.string().required(),
+    email: yup.string().required(),
+    password: yup.string().required(),
+    terms: yup.boolean().oneOf([true])
+  }),
   handleSubmit: (values) => {
     console.log(values);
   }
